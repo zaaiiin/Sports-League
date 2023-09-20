@@ -94,7 +94,6 @@ class LeagueService {
       const data = await response.json();
 
       if (data.success) {
-        console.log(data.access_token);
         return data.access_token;
       } else {
         throw new Error(data.error);
