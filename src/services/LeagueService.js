@@ -62,7 +62,7 @@ class LeagueService {
 
   async getApiVersion() {
     try {
-      const response = await fetch("http://localhost:3001/api/version", {
+      const response = await fetch("api/versions", {
         method: "GET",
       });
 
@@ -80,12 +80,9 @@ class LeagueService {
 
   async getAccessToken() {
     try {
-      const response = await fetch(
-        "http://localhost:3001/api/v1/getAccessToken ",
-        {
-          method: "GET",
-        }
-      );
+      const response = await fetch("api/accessTokens", {
+        method: "GET",
+      });
 
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -93,10 +90,10 @@ class LeagueService {
 
       const data = await response.json();
 
-      if (data.success) {
-        return data.access_token;
+      if (Array.isArray(data) && data.length > 0) {
+        return data[0].token;
       } else {
-        throw new Error(data.error);
+        throw new Error("Access token not found");
       }
     } catch (error) {
       console.error("Error fetching access token:", error);
@@ -108,26 +105,24 @@ class LeagueService {
     try {
       const accessToken = await this.getAccessToken();
 
-      const response = await fetch(
-        "http://localhost:3001/api/v1/getAllMatches",
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      );
+      const response = await fetch("api/matches", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
 
       if (!response.ok) {
         throw new Error(`Http error! Status: ${response.status}`);
       }
 
       const data = await response.json();
+      console.log(data);
 
-      if (data.success) {
-        this.setMatches(data.matches);
+      if (Array.isArray(data)) {
+        this.setMatches(data);
       } else {
-        throw new Error(data.error);
+        throw new Error("Match data not found");
       }
     } catch (error) {
       console.log("error fetching data:", error);
