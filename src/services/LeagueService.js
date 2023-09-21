@@ -1,4 +1,5 @@
 import matchers from "@testing-library/jest-dom/matchers";
+const axios = require("axios");
 
 /**
  * A class representing a service that processes the data for match schedule
@@ -59,10 +60,12 @@ class LeagueService {
   /**
    * Asynchronic function to fetch the data from the server.
    */
+  // Import the 'node-fetch' library
 
   async getApiVersion() {
     try {
-      const response = await fetch("api/versions", {
+      // Use 'fetch' to simulate an HTTP request to your Express server
+      const response = await axios.get("http://localhost:3001/api/data", {
         method: "GET",
       });
 
@@ -70,8 +73,12 @@ class LeagueService {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
+      // Since 'fetch' is making a request to your Express server, the response
+      // should contain the data from "db.json," including the API version
       const data = await response.json();
-      return data;
+
+      // Access the API version property in 'data'
+      return data.versions[0].version; // Assuming 'versions' is an array
     } catch (error) {
       console.error("Error fetching API version:", error);
       throw error;
@@ -80,18 +87,16 @@ class LeagueService {
 
   async getAccessToken() {
     try {
-      const response = await fetch("api/accessTokens", {
-        method: "GET",
-      });
+      const response = await axios.get("http://localhost:3001/api/data");
 
-      if (!response.ok) {
+      if (response.status !== 200) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
-      const data = await response.json();
+      const data = response.data;
 
-      if (Array.isArray(data) && data.length > 0) {
-        return data[0].token;
+      if (data.accessTokens && data.accessTokens.length > 0) {
+        return data.accessTokens[0].access_token;
       } else {
         throw new Error("Access token not found");
       }
@@ -105,22 +110,21 @@ class LeagueService {
     try {
       const accessToken = await this.getAccessToken();
 
-      const response = await fetch("api/matches", {
+      const response = await axios.get("http://localhost:3001/api/data", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
       });
 
-      if (!response.ok) {
-        throw new Error(`Http error! Status: ${response.status}`);
+      if (response.status !== 200) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
-      const data = await response.json();
-      console.log(data);
+      const data = response.data; // Axios automatically parses JSON responses
 
-      if (Array.isArray(data)) {
-        this.setMatches(data);
+      if (Array.isArray(data.matches)) {
+        this.setMatches(data.matches);
       } else {
         throw new Error("Match data not found");
       }
