@@ -1,20 +1,22 @@
 const express = require("express");
 const cors = require("cors");
-const app = express();
+const server = express();
 const port = process.env.PORT || 3001; // Use the provided PORT or a default one
 
 // Middleware to parse JSON request bodies
-app.use(express.json());
+server.use(express.json());
 
-app.use(cors());
+server.use(cors());
 
 // Serve your db.json file
-app.get("/api/data", (req, res) => {
+server.get("/api/data", (req, res) => {
   const data = require("./db.json"); // Assuming db.json is in the same directory
   res.json(data);
 });
 
 // Start the Express server
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+
+module.exports = server;
