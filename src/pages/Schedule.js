@@ -1,8 +1,8 @@
 import "../index.css";
 import LeagueService from "../services/LeagueService";
 import React, { useState, useEffect } from "react";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "../layouts/Header";
+import Footer from "../layouts/Footer";
 
 function Schedule() {
   const [matchesData, setMatchesData] = useState([""]);
