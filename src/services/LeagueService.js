@@ -65,9 +65,12 @@ class LeagueService {
   async getApiVersion() {
     try {
       // Use 'fetch' to simulate an HTTP request to your Express server
-      const response = await axios.get("http://localhost:3001/api/data", {
-        method: "GET",
-      });
+      const response = await axios.get(
+        "https://sports-league-server.vercel.app/api/data",
+        {
+          method: "GET",
+        }
+      );
 
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -87,7 +90,9 @@ class LeagueService {
 
   async getAccessToken() {
     try {
-      const response = await axios.get("http://localhost:3001/api/data");
+      const response = await axios.get(
+        "https://sports-league-server.vercel.app/api/data"
+      );
 
       if (response.status !== 200) {
         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -110,12 +115,15 @@ class LeagueService {
     try {
       const accessToken = await this.getAccessToken();
 
-      const response = await axios.get("http://localhost:3001/api/data", {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
+      const response = await axios.get(
+        "https://sports-league-server.vercel.app/api/data",
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
 
       if (response.status !== 200) {
         throw new Error(`HTTP error! Status: ${response.status}`);
