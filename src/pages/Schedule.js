@@ -50,7 +50,7 @@ function Schedule() {
       <div className="leagueboard min-h-screen flex flex-col">
         <Header></Header>
 
-        <div className="heading-container flex mt-60 mb-5 justify-center items-center">
+        <div className="heading-container flex mt-40 sm:mt-60 mb-5 justify-center items-center">
           <h1 className="headings text-2xl font-sans text-heading-color font-bold ">
             League Schedule
           </h1>

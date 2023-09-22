@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import Leaderboard from "../pages/Leaderboard";
 
 const Header = () => {
   return (
