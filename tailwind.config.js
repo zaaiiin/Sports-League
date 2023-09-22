@@ -4,6 +4,8 @@ module.exports = {
   mode: "jit",
   theme: {
     screens: {
+      xsm: "375px",
+      sm: "500px",
       md: "750px",
       lg: "1000px",
       check: "1200px",
@@ -33,9 +35,12 @@ module.exports = {
         37: "37px",
       },
       width: {
-        90: "90%",
+        38: "38px",
+        40: "40px",
         53: "53px",
         76: "76px",
+        90: "90%",
+        163: "163px",
         280: "280px",
         340: "340px",
       },

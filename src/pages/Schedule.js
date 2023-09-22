@@ -68,17 +68,17 @@ function Schedule() {
                   Stadium
                 </th>
 
-                <th colSpan="2" className="home-team_header text-right">
+                <th colSpan="2" className="home-team_header text-right w-163">
                   Home Team
                 </th>
 
                 <th></th>
-                <th colSpan="2" className="away-team_header text-left">
+                <th colSpan="2" className="away-team_header text-left w-163">
                   Away Team
                 </th>
               </tr>
             </thead>
-            <tbody className="table-body text-base font-bold text-table-footer-font-color ">
+            <tbody className="table-body sm:text-base sm:font-bold text-table-footer-font-color text-sm  font-extrabold">
               {matchesData.map((match, index) => (
                 <tr
                   key={index}
@@ -96,32 +96,33 @@ function Schedule() {
                     {match.stadium}
                   </td>
 
-                  <td className="home-teams" colSpan="2">
-                    <div className="flex items-center justify-between">
+                  <td className="home-teams w-40" colSpan="2">
+                    <div className="flex items-center">
                       <p className="text-right flex-grow">{match.homeTeam}</p>
-                      {/* <td className="flag-container h-70 flex justify-center items-center "> */}
                       <img
                         src={`https://flagsapi.codeaid.io/${match.homeTeam}.png`}
-                        className="home-team_flag w-53 h-37 ml-4"
+                        className="home-team_flag h-37 w-53 ml-4 "
                         alt="flag"
                       />{" "}
                     </div>
                   </td>
                   {/* </td> */}
 
-                  <td className="scores text-center mx-0 px-0">
+                  <td className="scores text-center mx-0 px-0 w-40 sm:w-53">
                     {match.homeTeamScore} : {match.awayTeamScore}
                   </td>
 
-                  <td className="flag-container h-70 flex" colSpan="2">
-                    <div className="flex items-center justify-between">
+                  <td className="away-teams w-40" colSpan="2">
+                    <div className="flex items-center">
                       <img
                         src={`https://flagsapi.codeaid.io/${match.awayTeam}.png`}
-                        className="away-team_flag w-53 h-37 mr-4"
+                        className="away-team_flag w-53 h-37 mr-4 "
                         alt="flag"
                       />
 
-                      <p className="away-teams text-left ">{match.awayTeam}</p>
+                      <p className="away-teams text-left w-">
+                        {match.awayTeam}
+                      </p>
                     </div>
                   </td>
                 </tr>
