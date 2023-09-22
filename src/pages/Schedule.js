@@ -101,7 +101,7 @@ function Schedule() {
                       <p className="text-right flex-grow">{match.homeTeam}</p>
                       <img
                         src={`https://flagsapi.codeaid.io/${match.homeTeam}.png`}
-                        className="home-team_flag h-37 w-53 ml-4 "
+                        className="home-team_flag h-37 w-53 ml-2"
                         alt="flag"
                       />{" "}
                     </div>
@@ -116,13 +116,11 @@ function Schedule() {
                     <div className="flex items-center">
                       <img
                         src={`https://flagsapi.codeaid.io/${match.awayTeam}.png`}
-                        className="away-team_flag w-53 h-37 mr-4 "
+                        className="away-team_flag w-53 h-37 mr-2"
                         alt="flag"
                       />
 
-                      <p className="away-teams text-left w-">
-                        {match.awayTeam}
-                      </p>
+                      <p className="away-teams text-left">{match.awayTeam}</p>
                     </div>
                   </td>
                 </tr>
