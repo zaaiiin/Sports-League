@@ -1,45 +1,13 @@
 import matchers from "@testing-library/jest-dom/matchers";
 const axios = require("axios");
 
-/**
- * A class representing a service that processes the data for match schedule
- * and generates leaderboard.
- *
- * NOTE: MAKE SURE TO IMPLEMENT ALL EXISITNG METHODS BELOW WITHOUT CHANGING THE INTERFACE OF THEM,
- *       AND PLEASE DO NOT RENAME, MOVE OR DELETE THIS FILE.
- *
- */
 class LeagueService {
   constructor() {
     this.matches = [];
   }
 
-  /**
-   * Sets the match schedule.
-   * Match schedule will be given in the following form:
-   * [
-   *      {
-   *          matchDate: [TIMESTAMP],
-   *          stadium: [STRING],
-   *          homeTeam: [STRING],
-   *          awayTeam: [STRING],
-   *          matchPlayed: [BOOLEAN],
-   *          homeTeamScore: [INTEGER],
-   *          awayTeamScore: [INTEGER]
-   *      },
-   *      {
-   *          matchDate: [TIMESTAMP],
-   *          stadium: [STRING],
-   *          homeTeam: [STRING],
-   *          awayTeam: [STRING],
-   *          matchPlayed: [BOOLEAN],
-   *          homeTeamScore: [INTEGER],
-   *          awayTeamScore: [INTEGER]
-   *      }
-   * ]
-   *
-   * @param {Array} matches List of matches.
-   */
+  //Sets the match array to matches.
+
   setMatches(matches) {
     if (Array.isArray(matches)) {
       this.matches = matches;
@@ -48,23 +16,16 @@ class LeagueService {
     }
   }
 
-  /**
-   * Returns the full list of matches.
-   *
-   * @returns {Array} List of matches.
-   */
+  // Returns the full list of matches.
+
   getMatches() {
     return this.matches;
   }
 
-  /**
-   * Asynchronic function to fetch the data from the server.
-   */
-  // Import the 'node-fetch' library
+  // Asynchronic function to fetch the data from the server.
 
   async getApiVersion() {
     try {
-      // Use 'fetch' to simulate an HTTP request to your Express server
       const response = await axios.get(
         "https://sports-league-server.vercel.app/api/data",
         {
@@ -75,13 +36,9 @@ class LeagueService {
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-
-      // Since 'fetch' is making a request to your Express server, the response
-      // should contain the data from "db.json," including the API version
       const data = await response.json();
 
-      // Access the API version property in 'data'
-      return data.versions[0].version; // Assuming 'versions' is an array
+      return data.versions[0].version;
     } catch (error) {
       console.error("Error fetching API version:", error);
       throw error;
@@ -142,21 +99,7 @@ class LeagueService {
     }
   }
 
-  /**
-   * Returns the leaderboard in a form of a list of JSON objecs.
-   *
-   * [
-   *      {
-   *          teamName: [STRING]',
-   *          matchesPlayed: [INTEGER],
-   *          goalsFor: [INTEGER],
-   *          goalsAgainst: [INTEGER],
-   *          points: [INTEGER]
-   *      },
-   * ]
-   *
-   * @returns {Array} List of teams representing the leaderboard.
-   */
+  //returns {Array} List of teams representing the leaderboard.
 
   getLeaderboard(matches) {
     const leaderboard = {};

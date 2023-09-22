@@ -1,6 +1,5 @@
 import "../index.css";
 import LeagueService from "../services/LeagueService";
-import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import Header from "../layouts/Header";
 import Footer from "../layouts/Footer";
