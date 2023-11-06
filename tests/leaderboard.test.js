@@ -1,10 +1,3 @@
-/**
- *
- *  THIS IS A TESTING FILE. YOU CAN FREELY MODIFY THE CODE BELOW IN ORDER TO TEST YOUR WORK.
- *  PLEASE DON´T CHANGE THE INTERFACE OF leagueService.js METHODS
- *
- */
-
 require("jest-fetch-mock").enableMocks();
 fetchMock.dontMock();
 
